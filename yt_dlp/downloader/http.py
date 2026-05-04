@@ -243,7 +243,14 @@ class HttpFD(FileDownloader):
                     if not to_stdout:
                         ctx.stream.close()
                     ctx.stream = None
-                ctx.resume_len = byte_counter if to_stdout else os.path.getsize(encodeFilename(ctx.tmpfilename))
+                # ctx.resume_len = byte_counter if to_stdout else os.path.getsize(encodeFilename(ctx.tmpfilename))
+                if ctx.tmpfilename == '-':
+                    ctx.resume_len = byte_counter
+                else:
+                    try:
+                        ctx.resume_len = os.path.getsize(ctx.tmpfilename)
+                    except FileNotFoundError:
+                        ctx.resume_len = 0
                 raise RetryDownload(e)
 
             while True:
