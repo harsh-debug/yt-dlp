@@ -1161,7 +1161,7 @@ def create_parser():
     verbosity.add_option(
         '--write-pages',
         action='store_true', dest='write_pages', default=False,
-        help='Write downloaded intermediary pages to files in the current directory to debug problems')
+        help='Write downloaded intermediary pages to files to debug problems (uses --paths if given)')
     verbosity.add_option(
         '--load-pages',
         action='store_true', dest='load_pages', default=False,
